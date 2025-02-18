@@ -1,0 +1,73 @@
+/* Main layout for the sidebar and content */
+#layoutSidenav {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar styling */
+#layoutSidenav_nav {
+    width: 250px;
+    background-color: #2a2e33;
+    color: white;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 20px;  /* Ensure padding for top items */
+}
+
+/* Ensure sidebar content flows vertically and does not overflow */
+.sb-sidenav-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar link styling */
+.sb-sidenav .nav-link {
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 5px; /* Add margin for spacing between items */
+}
+
+/* Hover effect on sidebar links */
+.sb-sidenav .nav-link:hover {
+    background-color: #495057;
+}
+
+/* Adjust icons next to text */
+.sb-sidenav .sb-nav-link-icon {
+    margin-right: 10px;
+}
+
+/* For collapsible sections, add padding and proper spacing */
+.collapse {
+    padding-left: 20px;
+}
+
+/* Collapsed link effect */
+.sb-sidenav-collapse-arrow {
+    margin-left: auto;
+}
+
+/* Active or selected items */
+.nav-link.active {
+    background-color: #007bff;
+}
+
+/* Footer */
+.sb-sidenav-footer {
+    padding: 10px 15px;
+    background-color: #212529;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.sb-sidenav-footer .small {
+    color: #adb5bd;
+}
