@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
 import Navbar from './Navbar';
 import Footer from './Footer';
 import axios from 'axios';
@@ -12,23 +10,26 @@ function Product() {
     const [product, setProduct] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [filterProduct, setFilterProduct] = useState([]);
+    const [selectedSort, setSelectedSort] = useState("default");
+    const [sortedProduct, setSortedProduct] = useState([]);
     const [loading, setLoading] = useState(false);
 
     async function getProduct() {
         setLoading(true);
 
-        const token = localStorage.getItem("auth_token"); // Retrieve the token from localStorage
+        const token = localStorage.getItem("auth_token");
 
         try {
             const productData = await axios.get("http://127.0.0.1:8000/api/viewallproduct", {
                 headers: {
-                    "Authorization": `Bearer ${token}`, // Send the token in the Authorization header
+                    "Authorization": `Bearer ${token}`,
                     "Accept": "application/json"
                 }
             });
 
             setProduct(productData.data.data);
             setFilterProduct(productData.data.data);
+            setSortedProduct(productData.data.data);
             console.log(productData.data.data);
         } catch (error) {
             console.error("Error fetching products:", error);
@@ -37,37 +38,74 @@ function Product() {
         }
     }
 
-    // async function getProduct() {
-    //     setLoading(true);
-    //     const token = localStorage.getItem("auth_token") || "";
-    //     const productData = await axios.get("http://127.0.0.1:8000/api/viewallproduct", {
-    //         headers: {
-    //             "Authorization": `Bearer ${token}`, // Send the token in the Authorization header
-    //             "Accept": "application/json"
-    //         }
-    //     });
-    //     setProduct(productData.data.data);
-    //     setFilterProduct(productData.data.data);
-    //     console.log(productData.data.data);
-    //     setLoading(false);
-    // }
-
     useEffect(() => {
         getProduct();
     }, [])
+
+    // const changeCategory = (e) => {
+    //     const category = e.target.value;
+    //     setSelectedCategory(category);
+
+    //     if (category === "all") {
+    //         setFilterProduct(product);
+    //     }
+    //     else {
+    //         const filtered = product.filter(item => item.category === category);
+    //         setFilterProduct(filtered);
+    //     }
+    // }
+
+    // const sort = (e) => {
+    //     const sort = e.target.value;
+    //     setSelectedSort(sort);
+
+    //     if (sort === "default") {
+    //         setSortedProduct(filterProduct);
+    //     }
+    //     else if (sort === "high") {
+    //         const sorted = sortedProduct.sort((a, b) => b.price - a.price);
+    //         setSortedProduct(sorted);
+    //     }
+    //     else if (sort === "low") {
+    //         const sorted = sortedProduct.sort((a, b) => a.price - b.price);
+    //         setSortedProduct(sorted);
+    //     }
+    //     else if (sort === "atoz") {
+    //         const sorted = sortedProduct.sort((a, b) => a.name.localeCompare(b.name));
+    //         setSortedProduct(sorted);
+    //     }
+    // }
 
     const changeCategory = (e) => {
         const category = e.target.value;
         setSelectedCategory(category);
 
-        if (category === "all") {
-            setFilterProduct(product);
+        let filtered = category === "all" ? [...product] : product.filter(item => item.category === category);
+
+        setFilterProduct(filtered);
+        setSortedProduct(filtered);
+    };
+
+
+    const sort = (e) => {
+        const sortValue = e.target.value;
+        setSelectedSort(sortValue);
+
+        let sorted = [...filterProduct];
+
+        if (sortValue === "default") {
+            setSortedProduct([...filterProduct]);
+        } else if (sortValue === "high") {
+            sorted.sort((a, b) => b.price - a.price);
+        } else if (sortValue === "low") {
+            sorted.sort((a, b) => a.price - b.price);
+        } else if (sortValue === "atoz") {
+            sorted.sort((a, b) => a.name.localeCompare(b.name));
         }
-        else {
-            const filtered = product.filter(item => item.category === category);
-            setFilterProduct(filtered);
-        }
-    }
+
+        setSortedProduct(sorted);
+    };
+
 
     async function addCart(id) {
         const token = localStorage.getItem("auth_token") || "";
@@ -100,7 +138,7 @@ function Product() {
                     <>
 
                         <h1 className='text-center p-4 text-secondary fw-semibold' style={{ fontFamily: "-moz-initial" }}>CLOTHES ARE THE SPIRIT OF FASHION.</h1>
-                        <div className="p-4" style={{ backgroundColor: "#f5f7f9" }}>
+                        <div className="p-5" style={{ backgroundColor: "#f5f7f9" }}>
                             <h1 className='container text-center' style={{ fontSize: "50px", fontFamily: "-moz-initial" }}>SHOP</h1>
                             <div className="container mb-3 d-flex justify-content-between text-secondary">
                                 <div>
@@ -116,7 +154,7 @@ function Product() {
                                 </div>
 
                                 <div>
-                                    <select className="form-select w-100 text-secondary border-3">
+                                    <select className="form-select w-100 text-secondary border-3" value={selectedSort} onChange={sort}>
                                         <option value="default">Default Sorting</option>
                                         <option value="high">Price High to Low</option>
                                         <option value="low">Price Low to High</option>
@@ -127,8 +165,8 @@ function Product() {
                             <div className="container">
                                 <div className="row">
                                     {
-                                        filterProduct.length > 0 ? (
-                                            filterProduct.map((productData) => {
+                                        sortedProduct.length > 0 ? (
+                                            sortedProduct.map((productData) => {
                                                 return (
                                                     <div className="col-12 col-sm-6 col-md-4 col-lg-3 my-2" key={productData.id}>
                                                         <div className='p-3 shadow-sm bg-white rounded text-center'>

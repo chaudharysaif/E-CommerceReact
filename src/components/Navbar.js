@@ -8,16 +8,6 @@ function Navbar(props) {
 
     const navigate = useNavigate()
 
-    // const token = localStorage.getItem("auth_token");
-    // let user = null;
-    // try {
-    //     user = token ? token : null;
-    //     console.log("Parsed user token:", user);
-    // } catch (error) {
-    //     console.error("Error processing token:", error);
-    //     localStorage.removeItem("auth_token");
-    // }
-
     // Logout Function
     function logout() {
         localStorage.removeItem("auth_token");
@@ -27,14 +17,14 @@ function Navbar(props) {
 
     return (
         <div className="">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light p-1">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="#">CLOTHING PALETTE</Link>
+                    <Link className="navbar-brand ms-4" to="#"><img src="/cplogo.jpg" alt="logo" height={55} width={60} /></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
                             {
                                 localStorage.getItem("auth_token") ?
                                     <>
@@ -57,32 +47,24 @@ function Navbar(props) {
                                         </div>
                                     </>
                             }
+
                         </ul>
+                        <div className='text-center d-flex ms-4 justify-content-center'>
+                            <span className='m-2'><Link to={"/cart"}><IoBag size={27} color='black' className='d-flex justify-content-center' /></Link></span>
+
+                            {localStorage.getItem("auth_token") ?
+                                <Nav className='p-0 d-flex justify-content-center'>
+                                    <NavDropdown className='p-0' title={<FaUserAlt size={22} color='black' />}>
+                                        <NavDropdown.Item> Profile </NavDropdown.Item>
+                                        <NavDropdown.Item onClick={logout}> Logout </NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav>
+                                :
+                                null
+                            }
+                        </div>
                     </div>
                 </div>
-
-                <Link to={"/cart"}><IoBag size={25} color='black' /></Link>
-
-                {localStorage.getItem("auth_token") ?
-                    <Nav>
-                        <NavDropdown title={<FaUserAlt size={20} color='black' />}>
-                            <NavDropdown.Item> Profile </NavDropdown.Item>
-                            <NavDropdown.Item onClick={logout}> Logout </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                    :
-                    null
-                }
-                {/* <div className="dropdown mx-5 d-flex justify-content-end">
-                    <Link className="btn btn-outline-success dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {user.name}
-                    </Link>
-
-                    <ul className="dropdown-menu">
-                        <li><Link className="dropdown-item" to="/">Profile</Link></li>
-                        <li><Link className="dropdown-item" to="/logout">Logout</Link></li>
-                    </ul>
-                </div> */}
             </nav>
         </div>
     )

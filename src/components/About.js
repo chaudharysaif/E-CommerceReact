@@ -5,7 +5,7 @@ function About() {
     return (
         <div>
             <Navbar aboutactive="info"/>
-            <h1>About Page</h1>
+            <h1 className='text-center '>Clothing Palette</h1>
         </div>
     )
 }

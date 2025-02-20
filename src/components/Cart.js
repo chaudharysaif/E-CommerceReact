@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Loader from './Loader';
+import Footer from './Footer';
 
 function Cart() {
     const [cart, setCart] = useState([]);
@@ -91,8 +92,8 @@ function Cart() {
                                 <table className='table text-center border rounded'>
                                     <thead>
                                         <tr>
-                                            <td style={{ backgroundColor: "#f5f7f9" }}></td>
-                                            <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>NAME</td>
+                                            {/* <td style={{ backgroundColor: "#f5f7f9" }}></td> */}
+                                            <td className='fw-semibold p-3 fs-5' colSpan={2} style={{ backgroundColor: "#f5f7f9" }}>PRODUCT</td>
                                             <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>PRICE</td>
                                             <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>QUANTITY</td>
                                             <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>TOTAL</td>
@@ -104,17 +105,17 @@ function Cart() {
                                         {
                                             cart.map((item) => (
                                                 <tr key={item.id}>
-                                                    <td className="py-2">
+                                                    <td className="py-2 d-flex justify-content-end">
                                                         <img
                                                             src={item.products?.image || "default.jpg"}
-                                                            height="70"
-                                                            width="60"
+                                                            height="110"
+                                                            width="85"
                                                             alt="Product"
                                                         />
                                                     </td>
-                                                    <td className="py-4">{item.products?.name}</td>
-                                                    <td className="py-4">₹ {item.products?.price}</td>
-                                                    <td className="py-4">
+                                                    <td className="py-5">{item.products?.name}</td>
+                                                    <td className="py-5">₹ {item.products?.price}</td>
+                                                    <td className="py-5">
                                                         <input
                                                             className='px-2'
                                                             type="number"
@@ -125,8 +126,8 @@ function Cart() {
                                                             onChange={(e) => { quantity(item.id, e.target.value) }}
                                                         />
                                                     </td>
-                                                    <td className="py-4">₹ {(item.products?.price * item.quantity).toFixed(2)}</td>
-                                                    <td className="py-4">
+                                                    <td className="py-5">₹ {(item.products?.price * item.quantity).toFixed(2)}</td>
+                                                    <td className="py-5">
                                                         <button className="btn btn-danger btn-sm" onClick={() => removeProduct(item.id)} >
                                                             Remove
                                                         </button>
@@ -138,8 +139,8 @@ function Cart() {
                                 </table>
                             </div>
 
-                            <div className="container table-responsive border-1 w-50 mt-3">
-                                <table className='container  table text-center border w-75'>
+                            <div className="container table-responsive border-1 w-50 mt-5">
+                                <table className='container table text-center border w-75'>
                                     <thead>
                                         <tr>
                                             <td colSpan={2} className='fw-semibold fs-4 text-center border-1' style={{ backgroundColor: "#f5f7f9" }}>CART TOTAL</td>
@@ -155,7 +156,7 @@ function Cart() {
                                             <td className='p-3'>₹ {totalPrice.toFixed(2)}</td>
                                         </tr>
                                         <tr>
-                                            <td colSpan={2}> <Link to="/checkout"> <button className="container p-3 my-2 btn btn-success" style={{borderRadius:"0"}}>CHECKOUT</button> </Link> </td>
+                                            <td colSpan={2}> <Link to="/checkout"> <button className="container p-3 my-1 btn btn-success" style={{borderRadius:"0"}}>CHECKOUT</button> </Link> </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -164,6 +165,7 @@ function Cart() {
                     </>
                 )
             }
+            <Footer/>
         </div>
     )
 }
