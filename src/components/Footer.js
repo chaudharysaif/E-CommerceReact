@@ -7,10 +7,10 @@ function Footer() {
             <footer>
                 <ul className="nav justify-content-center border-bottom my-3">
                     <li className='justify-content-start pb-2 me-5'><img src="cplogo.jpg" alt="logo" height={55} width={60} /></li>
-                    <li className="nav-item mx-3 mt-1"><Link to="#" className="nav-link py-2 text-body-secondary">HOME</Link></li>
-                    <li className="nav-item mx-3 mt-1"><Link to="/product" className="nav-link py-2 text-body-secondary">SHOP</Link></li>
-                    <li className="nav-item mx-3 mt-1"><Link to="/about" className="nav-link py-2 text-body-secondary">ABOUT</Link></li>
-                    <li className="nav-item mx-3 mt-1"><Link to="/contact" className="nav-link py-2 text-body-secondary">CONTACT</Link></li>
+                    <li className="nav-item m-1"><Link to="#" className="nav-link py-2 text-body-secondary">HOME</Link></li>
+                    <li className="nav-item m-1"><Link to="/product" className="nav-link py-2 text-body-secondary">SHOP</Link></li>
+                    <li className="nav-item m-1"><Link to="/about" className="nav-link py-2 text-body-secondary">ABOUT</Link></li>
+                    <li className="nav-item m-1"><Link to="/contact" className="nav-link py-2 text-body-secondary">CONTACT</Link></li>
                 </ul>
                 <div className='container d-flex justify-content-between'>
                     <p className="text-start text-body-secondary">© 2025 Designed and Developed by Saif Chaudhary</p>

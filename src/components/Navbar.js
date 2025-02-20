@@ -28,10 +28,10 @@ function Navbar(props) {
                             {
                                 localStorage.getItem("auth_token") ?
                                     <>
-                                        <li className="nav-item"><Link className={`nav-link fw-semibold text-${props.homeactive}`} aria-current="page" to="/home">HOME</Link></li>
-                                        <li className="nav-item"><Link className={`nav-link fw-semibold text-${props.productactive}`} to="/product">SHOP</Link></li>
-                                        <li className="nav-item"><Link className={`nav-link fw-semibold text-${props.aboutactive}`} to="/about">ABOUT</Link></li>
-                                        <li className="nav-item"><Link className={`nav-link fw-semibold text-${props.contactactive}`} to="/contact">CONTACT</Link></li>
+                                        <li className="nav-item mx-2"><Link className={`nav-link fw-semibold text-${props.homeactive}`} aria-current="page" to="/home">HOME</Link></li>
+                                        <li className="nav-item mx-2"><Link className={`nav-link fw-semibold text-${props.productactive}`} to="/product">SHOP</Link></li>
+                                        <li className="nav-item mx-2"><Link className={`nav-link fw-semibold text-${props.aboutactive}`} to="/about">ABOUT</Link></li>
+                                        <li className="nav-item mx-2"><Link className={`nav-link fw-semibold text-${props.contactactive}`} to="/contact">CONTACT</Link></li>
                                     </>
                                     :
                                     <>
