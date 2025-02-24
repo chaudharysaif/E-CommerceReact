@@ -57,15 +57,26 @@ function ViewProduct(props) {
                     </div>
                     <div className="col-md-6 my-auto">
                         <div style={{ width: "80%" }}>
-                            <div className='fs-5'>{product?.category ? product?.category.charAt(0).toUpperCase() + product?.category.slice(1) : ""}</div>
+                            <div className='fs-5 text-secondary'>{product?.category ? product?.category.charAt(0).toUpperCase() + product?.category.slice(1) : ""}</div>
                             <div className='fw-semibold fs-2 mb-2'>{product?.name}</div>
-                            <span className="fw-semibold fs-4 mt-2">₹ {product?.price}</span><small className='text-secondary fs-6'> +Free Shipping</small>
+                            <span className="fw-semibold fs-4 mt-2">₹ {product?.price}/-</span>
                             <div className='my-1'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus nisi sapiente error dignissimos corporis recusandae beatae dolores enim deserunt perspiciatis. Expedita, tenetur. Optio consequatur corporis saepe quam nemo, similique ea nobis eius quasi eos illo doloremque, modi dicta pariatur minus quis autem? Enim illo commodi nesciunt adipisci velit dolorem quas!</div>
                             <div className='my-2'><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /></div>
                             <button className="container btn my-2 p-2" style={{ backgroundColor: "#0dcaf0" }} onClick={() => { addCart(product?.id) }}>Add to cart</button>
                         </div>
+
+                        <div className='my-4 fw-semibold'>
+                            <h5 className='fw-semibold my-3'>Free Shipping on orders over ₹5999!</h5>
+                            <h6> <input type="checkbox" checked/>&nbsp; No-Risk Money Back Gurantee</h6>
+                            <h6> <input type="checkbox" checked/>&nbsp; No Hassle Refunds</h6>
+                            <h6> <input type="checkbox" checked/>&nbsp; Security Payments</h6>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div className="container my-5">
+                <h3>Description</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolores cumque quibusdam quae, perferendis debitis, sapiente corporis qui quisquam consectetur omnis illum ipsam commodi laborum voluptatibus expedita. Illo quo, repudiandae ratione perferendis, sequi rerum laborum officiis, qui alias culpa quas sed non. Eaque neque optio inventore fugit aut laboriosam eum, laudantium dolorum fuga aspernatur ratione amet. Molestiae sequi facilis.</p>
             </div>
             <Footer />
         </div>

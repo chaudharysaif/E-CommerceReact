@@ -101,6 +101,8 @@ function Product() {
             sorted.sort((a, b) => a.price - b.price);
         } else if (sortValue === "atoz") {
             sorted.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortValue === "ztoa") {
+            sorted.sort((a, b) => b.name.localeCompare(a.name));
         }
 
         setSortedProduct(sorted);
@@ -159,6 +161,7 @@ function Product() {
                                         <option value="high">Price High to Low</option>
                                         <option value="low">Price Low to High</option>
                                         <option value="atoz">A - Z</option>
+                                        <option value="ztoa">Z - A</option>
                                     </select>
                                 </div>
                             </div>
