@@ -7,8 +7,10 @@ import Loader from './Loader';
 
 function Checkout() {
     const [items, setItems] = useState([]);
+    const [total, setTotal] = useState(0); // Total with Backend
     const [loading, setLoading] = useState(false);
 
+    // TotalPrice of Product in cart with frontend (optional)
     let totalPrice = items.reduce((sum, user) => {
         return sum + user.carts.reduce((total, cart) => {
             return total + (cart.quantity * (cart.products.price || 0));
@@ -27,6 +29,8 @@ function Checkout() {
                 }
             });
             setItems(result.data.data);
+            setTotal(result.data.totalPrice);
+            console.log("totalPrice" , result.data.totalPrice)
             console.log("Results", result.data.data)
         } catch (error) {
             console.log("Error", error)
@@ -127,7 +131,7 @@ function Checkout() {
                                                     }
                                                     <tr>
                                                         <td className="fw-bold p-3">Total</td>
-                                                        <td className="fw-bold p-3">{totalPrice}.00</td>
+                                                        <td className="fw-bold p-3">{total}.00</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
