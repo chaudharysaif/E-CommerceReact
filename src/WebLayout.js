@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import ViewProduct from "./components/ViewProduct";
+import Profile from "./components/Profile";
 
 const WebLayout = () => {
     return (
@@ -22,6 +23,7 @@ const WebLayout = () => {
             <Route path="/checkout" element={<Protected Cmp={Checkout} />} />
             <Route path="/about" element={<Protected Cmp={About} />} />
             <Route path="/contact" element={<Protected Cmp={Contact} />} />
+            <Route path="/profile" element={<Protected Cmp={Profile} />} />
         </Routes>
     );
 };

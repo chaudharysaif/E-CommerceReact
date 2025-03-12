@@ -35,7 +35,7 @@ function Navbar(props) {
                                     </>
                                     :
                                     <>
-                                        <div className="dropdown mx-4 d-flex justify-content-end">
+                                        <div className="dropdown me-4">
                                             <Link className="btn btn-outline-success dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Account
                                             </Link>
@@ -50,15 +50,17 @@ function Navbar(props) {
 
                         </ul>
                         <div className='text-center d-flex ms-4 justify-content-center'>
-                            <span className='m-2'><Link to={"/cart"}><IoBag size={27} color='black' className='d-flex justify-content-center' /></Link></span>
-
                             {localStorage.getItem("auth_token") ?
-                                <Nav className='p-0 d-flex justify-content-center'>
-                                    <NavDropdown className='p-0' title={<FaUserAlt size={22} color='black' />}>
-                                        <NavDropdown.Item> Profile </NavDropdown.Item>
-                                        <NavDropdown.Item onClick={logout}> Logout </NavDropdown.Item>
-                                    </NavDropdown>
-                                </Nav>
+                                <>
+                                    <span className='m-2'><Link to={"/cart"}><IoBag size={27} color='black' className='d-flex justify-content-center' /></Link></span>
+
+                                    <Nav className='p-0 d-flex justify-content-center'>
+                                        <NavDropdown className='p-0' title={<FaUserAlt size={22} color='black' />}>
+                                            <NavDropdown.Item as={Link} to={"/profile"} style={{ textDecoration: "none", color: "black" }} > Profile </NavDropdown.Item>
+                                            <NavDropdown.Item onClick={logout}> Logout </NavDropdown.Item>
+                                        </NavDropdown>
+                                    </Nav>
+                                </>
                                 :
                                 null
                             }

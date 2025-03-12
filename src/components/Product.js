@@ -13,6 +13,8 @@ function Product() {
     const [selectedSort, setSelectedSort] = useState("default");
     const [sortedProduct, setSortedProduct] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState();
 
     async function getProduct() {
         setLoading(true);
@@ -20,19 +22,23 @@ function Product() {
         const token = localStorage.getItem("auth_token");
 
         try {
-            const productData = await axios.get("http://127.0.0.1:8000/api/viewallproduct", {
+            const productData = await axios.get(`http://127.0.0.1:8000/api/viewallproduct?page=${currentPage}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Accept": "application/json"
                 }
             });
 
-            setProduct(productData.data.data);
-            setFilterProduct(productData.data.data);
-            setSortedProduct(productData.data.data);
-            console.log(productData.data.data);
+            setProduct(productData.data.data.data);
+            setFilterProduct(productData.data.data.data);
+            setSortedProduct(productData.data.data.data);
+            setTotalPage(productData.data.total_page);
+
+            console.log("Retrun product", productData.data.data.data);
+            console.log("Current page", currentPage);
+            console.log("Total page", productData.data.total_page);
         } catch (error) {
-            console.error("Error fetching products:", error);
+            console.log("Error fetching products:", error);
         } finally {
             setLoading(false);
         }
@@ -40,52 +46,17 @@ function Product() {
 
     useEffect(() => {
         getProduct();
-    }, [])
+    }, [currentPage])
 
-    // const changeCategory = (e) => {
-    //     const category = e.target.value;
-    //     setSelectedCategory(category);
-
-    //     if (category === "all") {
-    //         setFilterProduct(product);
-    //     }
-    //     else {
-    //         const filtered = product.filter(item => item.category === category);
-    //         setFilterProduct(filtered);
-    //     }
-    // }
-
-    // const sort = (e) => {
-    //     const sort = e.target.value;
-    //     setSelectedSort(sort);
-
-    //     if (sort === "default") {
-    //         setSortedProduct(filterProduct);
-    //     }
-    //     else if (sort === "high") {
-    //         const sorted = sortedProduct.sort((a, b) => b.price - a.price);
-    //         setSortedProduct(sorted);
-    //     }
-    //     else if (sort === "low") {
-    //         const sorted = sortedProduct.sort((a, b) => a.price - b.price);
-    //         setSortedProduct(sorted);
-    //     }
-    //     else if (sort === "atoz") {
-    //         const sorted = sortedProduct.sort((a, b) => a.name.localeCompare(b.name));
-    //         setSortedProduct(sorted);
-    //     }
-    // }
 
     const changeCategory = (e) => {
         const category = e.target.value;
         setSelectedCategory(category);
 
         let filtered = category === "all" ? [...product] : product.filter(item => item.category === category);
-
         setFilterProduct(filtered);
         setSortedProduct(filtered);
     };
-
 
     const sort = (e) => {
         const sortValue = e.target.value;
@@ -128,6 +99,16 @@ function Product() {
         }
     }
 
+    function nextPage() {
+        setCurrentPage(currentPage + 1);
+        getProduct();
+    }
+
+    function prevPage() {
+        setCurrentPage(currentPage - 1);
+        getProduct();
+    }
+
     return (
         <div>
             <Navbar productactive="info" />
@@ -138,8 +119,7 @@ function Product() {
                     </div>
                 ) : (
                     <>
-
-                        <h1 className='text-center p-4 text-secondary fw-semibold' style={{ fontFamily: "-moz-initial" }}>CLOTHES ARE THE SPIRIT OF FASHION.</h1>
+                        <h1 className='text-center p-5 text-secondary fw-semibold' style={{ fontFamily: "-moz-initial" }}>CLOTHES ARE THE SPIRIT OF FASHION.</h1>
                         <div className="p-5" style={{ backgroundColor: "#f5f7f9" }}>
                             <h1 className='container text-center' style={{ fontSize: "50px", fontFamily: "-moz-initial" }}>SHOP</h1>
                             <div className="container mb-3 d-flex justify-content-between text-secondary">
@@ -171,7 +151,7 @@ function Product() {
                                         sortedProduct.length > 0 ? (
                                             sortedProduct.map((productData) => {
                                                 return (
-                                                    <div className="col-12 col-sm-6 col-md-4 col-lg-3 my-2" key={productData.id}>
+                                                    <div className="col-12 col-sm-6 col-md-4 col-lg-3 my-3" key={productData.id}>
                                                         <div className='p-3 shadow-sm bg-white rounded text-center'>
                                                             <Link to={"/viewproduct/" + productData.id}> <div className='container m-auto'><img
                                                                 src={productData.image}
@@ -180,21 +160,43 @@ function Product() {
                                                                 style={{ width: "100%", height: "250px", objectFit: "contain" }}
                                                             />
                                                             </div> </Link>
-                                                            <div className="mx-3"><div className='fw-semibold my-1'> {productData.name} </div>
-                                                                <div className='fw-bold my-1'> ₹{productData.price} </div>
+                                                            <div className="mx-3">
                                                                 <div className='my-1 text-secondary'>{productData.category.charAt(0).toUpperCase() + productData.category.slice(1)}</div>
+                                                                <div className='fw-semibold my-1 fs-5'> {productData.name} </div>
+                                                                
+                                                                <div className='fw-bold my-1'> ₹{productData.price} </div>
                                                                 <div className='my-1'><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /></div>
-                                                                <button className="container btn mt-1 p-2" style={{ backgroundColor: "#0dcaf0" }} onClick={() => { addCart(productData.id) }}>Add to cart</button>
+                                                                <button className="container btn mt-2 p-2" style={{ backgroundColor: "#0dcaf0" }} onClick={() => { addCart(productData.id) }}>Add to cart</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 )
                                             })
                                         ) : (
-                                            <div className="text-center">No products found for this category.</div>
+                                            <div className="text-center fs-4 fw-semibold">No products found for this category!</div>
                                         )
                                     }
                                 </div>
+                            </div>
+                        </div>
+
+                        <div className="container my-5">
+                            <div className="container-fluid d-flex justify-content-between">
+                                <button className="text-center btn btn-info px-4 mx-4" style={{ height: "40px", borderRadius: "0" }}
+                                    onClick={() => { prevPage() }}
+                                    disabled={currentPage === 1}
+                                >
+                                    Prev
+                                </button>
+
+                                <div className="text-center my-auto"><h6 className='m-0 fw-semibold'>{currentPage} Page of {totalPage} </h6></div>
+
+                                <button className="text-center btn btn-info px-4 mx-4" style={{ height: "40px", borderRadius: "0" }}
+                                    onClick={() => { nextPage() }}
+                                    disabled={currentPage === totalPage}
+                                >
+                                    Next
+                                </button>
                             </div>
                         </div>
                         <Footer />

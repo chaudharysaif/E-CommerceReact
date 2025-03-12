@@ -5,7 +5,7 @@ function Footer() {
     return (
         <div>
             <footer>
-                <ul className="container  nav justify-content-center border-bottom my-3 p-3">
+                <ul className="container  nav justify-content-center border-bottom my-5 p-3">
                     <li className='justify-content-start pb-2 me-5'><img src="/cplogo.jpg" alt="logo" height={55} width={60} /></li>
                     <div className="mx-auto text-center d-flex">
                         <li className="nav-item"><Link to="/home" className="nav-link text-body-secondary">HOME</Link></li>

@@ -85,87 +85,95 @@ function Cart() {
                     </div>
                 ) : (
                     <>
-                        <div className='p-4 mt-4'>
-                            <h1 className="text-center my-2">CART</h1>
+                        {
+                            cart.length > 0 ?
+                                <div className='p-4 mt-4'>
+                                    <h1 className="text-center my-3">CART</h1>
 
-                            <div className="container table-responsive">
-                                <table className='table text-center border rounded'>
-                                    <thead>
-                                        <tr>
-                                            {/* <td style={{ backgroundColor: "#f5f7f9" }}></td> */}
-                                            <td className='fw-semibold p-3 fs-5' colSpan={2} style={{ backgroundColor: "#f5f7f9" }}>PRODUCT</td>
-                                            <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>PRICE</td>
-                                            <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>QUANTITY</td>
-                                            <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>TOTAL</td>
-                                            <td style={{ backgroundColor: "#f5f7f9" }}></td>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        {
-                                            cart.map((item) => (
-                                                <tr key={item.id}>
-                                                    <td className="py-2 d-flex justify-content-end">
-                                                        <img
-                                                            src={item.products?.image || "default.jpg"}
-                                                            height="110"
-                                                            width="85"
-                                                            alt="Product"
-                                                        />
-                                                    </td>
-                                                    <td className="py-5">{item.products?.name}</td>
-                                                    <td className="py-5">₹ {item.products?.price}</td>
-                                                    <td className="py-5">
-                                                        <input
-                                                            className='px-2'
-                                                            type="number"
-                                                            style={{ width: "60px" }}
-                                                            value={item.quantity}
-                                                            min={1}
-                                                            max={10}
-                                                            onChange={(e) => { quantity(item.id, e.target.value) }}
-                                                        />
-                                                    </td>
-                                                    <td className="py-5">₹ {(item.products?.price * item.quantity).toFixed(2)}</td>
-                                                    <td className="py-5">
-                                                        <button className="btn btn-danger btn-sm" onClick={() => removeProduct(item.id)} >
-                                                            Remove
-                                                        </button>
-                                                    </td>
+                                    <div className="container table-responsive">
+                                        <table className='table text-center border rounded'>
+                                            <thead>
+                                                <tr>
+                                                    {/* <td style={{ backgroundColor: "#f5f7f9" }}></td> */}
+                                                    <td className='fw-semibold p-3 fs-5' colSpan={2} style={{ backgroundColor: "#f5f7f9" }}>PRODUCT</td>
+                                                    <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>PRICE</td>
+                                                    <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>QUANTITY</td>
+                                                    <td className='fw-semibold p-3 fs-5' style={{ backgroundColor: "#f5f7f9" }}>TOTAL</td>
+                                                    <td style={{ backgroundColor: "#f5f7f9" }}></td>
                                                 </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                            </thead>
 
-                            <div className="container table-responsive border-1 w-50 mt-5">
-                                <table className='container table text-center border w-75'>
-                                    <thead>
-                                        <tr>
-                                            <td colSpan={2} className='fw-semibold fs-4 text-center border-1' style={{ backgroundColor: "#f5f7f9" }}>CART TOTAL</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className='p-3'>Total</td>
-                                            <td className='p-3'>₹ {totalPrice.toFixed(2)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td className='p-3'>SubTotal</td>
-                                            <td className='p-3'>₹ {totalPrice.toFixed(2)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td colSpan={2}> <Link to="/checkout"> <button className="container p-3 my-1 btn btn-success" style={{borderRadius:"0"}}>CHECKOUT</button> </Link> </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                            <tbody>
+                                                {
+                                                    cart.map((item) => (
+                                                        <tr key={item.id}>
+                                                            <td className="py-2 d-flex justify-content-end">
+                                                                <img
+                                                                    src={item.products?.image || "default.jpg"}
+                                                                    height="110"
+                                                                    width="85"
+                                                                    alt="Product"
+                                                                />
+                                                            </td>
+                                                            <td className="py-5">{item.products?.name}</td>
+                                                            <td className="py-5">₹ {item.products?.price}</td>
+                                                            <td className="py-5">
+                                                                <input
+                                                                    className='px-2'
+                                                                    type="number"
+                                                                    style={{ width: "60px" }}
+                                                                    value={item.quantity}
+                                                                    min={1}
+                                                                    max={10}
+                                                                    onChange={(e) => { quantity(item.id, e.target.value) }}
+                                                                />
+                                                            </td>
+                                                            <td className="py-5">₹ {(item.products?.price * item.quantity).toFixed(2)}</td>
+                                                            <td className="py-5">
+                                                                <button className="btn btn-danger btn-sm" onClick={() => removeProduct(item.id)} >
+                                                                    Remove
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div className="container table-responsive border-1 w-50 mt-5">
+                                        <table className='container table text-center border w-75'>
+                                            <thead>
+                                                <tr>
+                                                    <td colSpan={2} className='fw-semibold fs-4 text-center border-1' style={{ backgroundColor: "#f5f7f9" }}>CART TOTAL</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td className='p-3'>Total</td>
+                                                    <td className='p-3'>₹ {totalPrice.toFixed(2)}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td className='p-3'>SubTotal</td>
+                                                    <td className='p-3'>₹ {totalPrice.toFixed(2)}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colSpan={2}> <Link to="/checkout"> <button className="container p-3 my-1 btn btn-success" style={{ borderRadius: "0" }}>CHECKOUT</button> </Link> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                :
+                                <div className='d-flex justify-content-center align-items-center vh-100'>
+                                    <h3 className='fw-semibold mx-2 shadow p-2 px-4'>No items in cart!</h3>
+                                    <img src="/empty-cart.png" alt="Empty Cart" height={200} />
+                                </div>
+                        }
                     </>
                 )
             }
-            <Footer/>
+            <Footer />
         </div>
     )
 }

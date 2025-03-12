@@ -15,31 +15,33 @@ function Signup() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [password_confirmation, setPassword_Confirmation] = useState("")
     const navigate = useNavigate();
 
     async function signUp() {
-        let user = { name, email, password };
+        let user = { name, email, password, password_confirmation};
 
         try {
-            let response = await axios.post("http://127.0.0.1:8000/api/signup", user, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                }
-            });
+            let response = await axios.post("http://127.0.0.1:8000/api/signup", user);
 
             let result = response.data;
             console.log("Result:", result);
-            // if (result.token) {
-            //     localStorage.setItem("auth_token", result.token);
-            //     navigate("/login");
-            // } else {
-            //     alert("Token doesn't generated");
-            // }
+
+            if (result.status === true) {
+                alert(result.message);
+                navigate("/login");
+            } else {
+                alert(result.message);
+            }
         } catch (error) {
-            console.error("Signup failed:", error);
-            // localStorage.removeItem("auth_token");
-            alert("Something went wrong. Please try again.");
+            if (error.response && error.response.status === 422) {
+                let errors = error.response.data.errors;
+                let errorMessages = Object.values(errors).flat().join("\n");
+                alert(errorMessages);
+            } else {
+                console.log("Signup failed:", error);
+                alert("An error occurred. Please try again.");
+            }
         }
     }
 
@@ -70,7 +72,7 @@ function Signup() {
                         <div className=" mt-3">
                             <label htmlFor="label">Confirm Password:</label>
                             <br />
-                            <input type="password" className="form-control" required placeholder="confirm password" name="cpassword" />
+                            <input type="password" className="form-control" onChange={(e) => { setPassword_Confirmation(e.target.value) }} required placeholder="confirm password" name="cpassword" />
 
                         </div>
 

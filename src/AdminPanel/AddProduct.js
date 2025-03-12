@@ -30,8 +30,8 @@ function AddProduct() {
                 'Content-Type': 'multipart/form-data',
             }
         });
-        alert("Product Added to Database")
-        navigate("/addproduct");
+        alert("Product Added to Database");
+        navigate("/admin/addproduct");
     }
     
     return (

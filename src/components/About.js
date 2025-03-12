@@ -7,7 +7,7 @@ function About() {
         <div>
             <Navbar aboutactive="info" />
 
-            <div className="container p-4 my-5 p-md-5 mb-4 rounded text-body-emphasis img-fluid" style={{ backgroundImage: "url('aboutus.jpg')", backgroundPosition: "bottom", backgroundSize: "cover" }}>
+            <div className="container-fluid p-5 mb-5 text-body-emphasis img-fluid" style={{ backgroundImage: "url('aboutus.jpg')", backgroundPosition: "bottom", backgroundSize: "cover", height: "550px" }}>
                 <div className="col-lg-6 px-0">
                     <h1 className="display-4 fst-italic">Title of a longer featured about post</h1>
                     <p className="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
@@ -61,17 +61,17 @@ function About() {
                         <div className="col-12 col-md-3 col-lg-2 m-4 py-3" style={{ backgroundColor: "#ffffff" }}>
                             <img src="tester1.jpeg" alt="Rounded Profile" className='rounded-circle img-fluid my-2' width={"150"} /> <span> <h5 className='m-0'>John Marith</h5></span>
                             <small className='text-secondary'>Founder- CEO</small>
-                           
+
                         </div>
                         <div className="col-12 col-md-3 col-lg-2 m-4 py-3" style={{ backgroundColor: "#ffffff" }}>
                             <img src="tester2.jpg" alt="Rounded Profile" className='rounded-circle img-fluid my-2' width={"150"} /> <span><h5 className='m-0'>Tom Lathan</h5></span>
                             <small className='text-secondary'>Lead Developer</small>
-                            
+
                         </div>
                         <div className="col-12 col-md-3 col-lg-2 m-4 py-3" style={{ backgroundColor: "#ffffff" }}>
                             <img src="tester3.jpg" alt="Rounded Profile" className='rounded-circle img-fluid my-2' width={"150"} /> <span><h5 className='m-0'>Harry Brook</h5></span>
                             <small className='text-secondary'>Intern Designer</small>
-                            
+
                         </div>
                     </div>
                 </div>

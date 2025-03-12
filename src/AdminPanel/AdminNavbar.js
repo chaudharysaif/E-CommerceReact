@@ -9,7 +9,7 @@ function AdminNavbar(props) {
     const user = JSON.parse(localStorage.getItem('user-info'));
 
     function logout() {
-        localStorage.removeItem("user-info");
+        localStorage.removeItem("auth_token");
         console.log("Data cleared from localStorage");
         navigate("/login")
     }
@@ -25,12 +25,12 @@ function AdminNavbar(props) {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ms-auto mb-2 text-light mb-lg-0">
                             {
-                                localStorage.getItem('user-info') ?
+                                localStorage.getItem("auth_token") ?
                                     <>
-
                                         <Nav>
-                                        <li className='p-2' ><Link className="dropdown-item" to="/admin/adminsearch">Search</Link></li>
-                                            <NavDropdown title={user && user.name}>
+                                        <li className='p-2 mx-3' ><Link className="dropdown-item" to="/admin/adminsearch">Search</Link></li>
+                                        {/* title={user && user.name} */}
+                                            <NavDropdown title={ <span style={{textDecoration:"none", color:"white"}}> Account </span> } >
                                                 <NavDropdown.Item> Profile </NavDropdown.Item>
                                                 <NavDropdown.Item onClick={logout}> Logout </NavDropdown.Item>
                                             </NavDropdown>

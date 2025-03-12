@@ -18,29 +18,27 @@ function Login() {
     async function login() {
         let user = { email, password };
         console.log(user);
-        // const token = localStorage.getItem("auth_token") || "";
-        
+
         try {
-            let response = await axios.post("http://127.0.0.1:8000/api/login", user, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    // "Authorization": `Bearer ${token}`
-                }
-            });
+            let response = await axios.post("http://127.0.0.1:8000/api/login", user);
 
             let result = response.data;
-
             if (result.status === true) {
                 localStorage.setItem("auth_token", result.token);
                 navigate("/home");
             } else {
-                alert("Email or Password not matched");
+                alert(result.error);
             }
         } catch (error) {
-            console.error("Login failed:", error);
             localStorage.removeItem("auth_token");
-            alert("Something went wrong. Please try again.");
+            if (error.response && error.response.status === 422) {
+                let errors = error.response.data.errors;
+                let errorMessages = Object.values(errors).flat().join("\n");
+                alert(errorMessages);
+            } else {
+                console.log("Signup failed:", error);
+                alert("An error occurred. Please try again.");
+            }
         }
     }
 

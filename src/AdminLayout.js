@@ -13,10 +13,10 @@ const AdminLayout = () => {
         <div className="admin-container mt-5">
             <AdminNavbar />
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-12 col-md-3 col-lg-2">
                     <Sidebar />
                 </div>
-                <div className="col-md-10">
+                <div className="col-12 col-md-9 col-lg-10">
                     <Routes>
                         <Route path="/" element={<Protected Cmp={Dashboard} />} />
                         <Route path="/addproduct" element={<Protected Cmp={AddProduct} />} />

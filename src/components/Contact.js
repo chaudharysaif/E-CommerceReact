@@ -22,33 +22,33 @@ function Contact() {
                 }}>
                     <div className="col-12 col-md-6 me-4">
                         <div className=" card-body gap-2 p-0 ">
-                            <div className="container mt-3">
+                            <div className="container m-3">
                                 <label className='my-1' htmlFor="label">Name:</label>
                                 
                                 <input type="text" className="form-control" required placeholder="name"
                                     name="name" />
                             </div>
 
-                            <div className="container mt-3">
+                            <div className="container m-3">
                                 <label className='my-1' htmlFor="label">Email:</label>
                                 
                                 <input type="email" className="form-control" required placeholder="example@gmail.com"
                                     aria-describedby="emailHelp" id="email" name="email" />
                             </div>
 
-                            <div className="container mt-3">
+                            <div className="container m-3">
                                 <label className='my-1' htmlFor="label">Subject:</label>
                                 
                                 <input type="text" className="form-control" required placeholder="subject"
                                     name="subject" />
                             </div>
 
-                            <div className="container mt-3">
+                            <div className="container m-3">
                                 <label className='my-1' htmlFor="label">Message:</label>
                                 <textarea className="form-control" required name="message" type="text" id="labelname"
                                     style={{ width: "100%", height: "150px" }}></textarea>
                             </div>
-                            <button className="btn btn-success mt-5 mx-3 px-4" style={{ borderRadius: 0 }}>Send Message</button>
+                            <button className="btn btn-success m-4 mx-5 px-3" style={{ borderRadius: 0 }}>Send Message</button>
                         </div>
                     </div>
                 </div>

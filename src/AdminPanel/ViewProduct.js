@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import AdminNavbar from './AdminNavbar'
-import Sidebar from './Sidebar'
 import axios from 'axios';
 import ViewProductCard from './ViewProductCard';
 import { Link } from 'react-router-dom';
@@ -15,8 +13,8 @@ function ViewProduct() {
         setLoading(true);
         try {
             const result = await axios.get(api);
-            console.log(result.data.data);
-            setProduct(result.data.data);
+            console.log("Product", result.data.data.data);
+            setProduct(result.data.data.data);
             setLoading(false);
         } catch (error) {
             console.log("Error Message: ", error.message);
@@ -45,7 +43,7 @@ function ViewProduct() {
                     {loading && <Loader />}
                 </div>
                 <div className="container table-responsive">
-                    <table className='table border table-light table-striped'>
+                    <table className='table border text-center table-light table-striped'>
                         <thead>
                             <tr>
                                 <td>#</td>
@@ -65,6 +63,12 @@ function ViewProduct() {
                         }
                         {/* </div> */}
                     </table>
+                </div>
+
+                <div className="container my-4 d-flex justify-content-center justify-content-between ">
+                    <button className='btn btn-info px-3'>Prev</button>
+                    
+                    <button className='btn btn-info px-3'>Next</button>
                 </div>
 
             </div>
