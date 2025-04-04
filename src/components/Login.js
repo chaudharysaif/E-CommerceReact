@@ -36,7 +36,7 @@ function Login() {
                 let errorMessages = Object.values(errors).flat().join("\n");
                 alert(errorMessages);
             } else {
-                console.log("Signup failed:", error);
+                console.log("Login failed:", error);
                 alert("An error occurred. Please try again.");
             }
         }

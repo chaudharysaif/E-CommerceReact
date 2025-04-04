@@ -14,7 +14,7 @@ function Sidebar() {
                 <hr />
                 <ul className="nav nav-pills flex-column mb-auto">
                     <li className="nav-item">
-                        <Link to="/admin" className="nav-link active" aria-current="page">
+                        <Link to="/admin" className="nav-link text-white" aria-current="page">
                             <svg className="bi pe-none me-2" width="16" height="16"><use to="#home"></use></svg>
                             Home
                         </Link>
@@ -25,12 +25,12 @@ function Sidebar() {
                             Dashboard
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="#" className="nav-link text-white">
                             <svg className="bi pe-none me-2" width="16" height="16"><use to="#table"></use></svg>
                             Orders
                         </Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link to="/admin/addproduct" className="nav-link text-white">
                             <svg className="bi pe-none me-2" width="16" height="16"><use to="#grid"></use></svg>

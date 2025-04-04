@@ -163,8 +163,7 @@ function Product() {
                                                             <div className="mx-3">
                                                                 <div className='my-1 text-secondary'>{productData.category.charAt(0).toUpperCase() + productData.category.slice(1)}</div>
                                                                 <div className='fw-semibold my-1 fs-5'> {productData.name} </div>
-                                                                
-                                                                <div className='fw-bold my-1'> ₹{productData.price} </div>
+                                                                <div className='fw-semibold my-1'> ₹{productData.price} </div>
                                                                 <div className='my-1'><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /><CiStar size={20} /></div>
                                                                 <button className="container btn mt-2 p-2" style={{ backgroundColor: "#0dcaf0" }} onClick={() => { addCart(productData.id) }}>Add to cart</button>
                                                             </div>
